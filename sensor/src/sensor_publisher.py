@@ -21,47 +21,50 @@ count = 0
 battery_ = 100
 heating_ = 0
 risk_ = 0
+
+req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger1 = False, danger2 = False, danger3 = False)
+req = res = requester(req)
 print "status | battery :", battery_, "heating_ :", heating_, "risk :", risk_
 
 
 while not rospy.is_shutdown():
-    msg.timestamp = rospy.get_rostime()
+    count += 1 
+
+    msg.Runtime.data = count
     msg.Speed.x += 1
     msg.Speed.y += 1.5
     msg.Speed.z += 2
     msg.Distance.data = msg.Distance.data + msg.Speed.x + msg.Speed.y
     pub.publish(msg)
 
-    count += 1    
     battery_ -= 2.5
     heating_ += 3
     risk_ = heating_/10 + (100-battery_)
     
 
+    if risk_ >= 80 and battery_ <=20 and heating_ >= 80:
+        req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger1 = True, danger2 = True, danger3 = True)
+	res = requester(req)
+        print "Danger! You should better Stop!! | battery :", req.battery, "heat :", req.heating, "risk :", req.risk
+
+    if battery_ <= 20:
+        req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger2 = True)
+        res = requester(req)
+        print "Low battery!  | battery :", req.battery
+            
     if risk_ >= 80:
         req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger1 = True)
         res = requester(req)
-        print "경과시간 :", count,"초", "위험도 높음 | 배터리 :" req.battery, "열 :", req.heating, "위험도 :", req.risk
+        print "Risk is high!  | risk :", req.risk
+        
 
-    elif battery_ <= 20:
-        req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger2 = True)
-        res = requester(req)
-        print "경과시간 :", count,"초", "전력 부족 | 배터리 :" req.battery, "열 :", req.heating, "위험도 :", req.risk
-
-    elif heating_ >= 80:
+    if heating_ >= 80:
         req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger3 = True)
         res = requester(req)
-        print "경과시간 :", count,"초", "과열 | 배터리 :" req.battery, "열 :", req.heating, "위험도 :", req.risk
-
-    elif risk_ >= 80 and battery_ <=20 and heating_ >= 80:
-        req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger1 = True, danger2 = True, danger3 = True)
-        print "경과시간 :", count,"초", "위험! 작동중지 권장! | 배터리 :" req.battery, "열 :", req.heating, "위험도 :", req.risk
-    
-    else:
-        req = ServtypeRequest(battery = battery_, heating = heating_, risk = risk_, danger1 = False, danger2 = False, danger3 = False)
+        print "Overheating!  | heat :", req.heating
 
 
-    print "Time :", msg.timestamp.secs%100
+    print "Time :", msg.Runtime.data, "s"
     print "Speed | x :", msg.Speed.x, "| y :", msg.Speed.y, "| z :", msg.Speed.z
     print "Distance :", msg.Distance.data, "m"
     print ""
