@@ -8,7 +8,6 @@ rospy.init_node('Sensor')
 pub = rospy.Publisher('Sensor_msg', Mesgtype, queue_size=1)
 msg = Mesgtype()
 rate = rospy.Rate(1)
-msg.topic_custom
 msg.Speed.x = 0
 msg.Speed.y = 0
 msg.Speed.z = 0
