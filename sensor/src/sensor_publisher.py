@@ -8,11 +8,21 @@ rospy.init_node('Sensor')
 pub = rospy.Publisher('Sensor_msg', Mesgtype, queue_size=1)
 msg = Mesgtype()
 rate = rospy.Rate(1)
+msg.topic_custom
+msg.Speed.x = 0
+msg.Speed.y = 0
+msg.Speed.z = 0
+msg.Distance = 0
+
 while not rospy.is_shutdown():
     msg.timestamp = rospy.get_rostime()
     second = msg.timestamp.secs
-    msg.Speed = Vector3(x=second/10, y=second/7, theta=second/5)
-    msg.Distance = Float64(msg.Speed.x+msg.Speed.y)    
+    msg.Speed.x += 1
+    msg.Speed.y += 1.5
+    msg.Speed.z += 2
+    msg.Distance = msg.Distance + msg.Speed.x + msg.Speed.y
     pub.publish(msg)
-    print "Sensor:", msg.timestamp.secs%100, "  주행 속도 | x:",msg.Speed.x," y:" msg.Speed.y," 각도:" msg.Speed.theta, "    주행 거리: ", msg.Distance
-    rate.sleep()d
+
+    print(msg.Speed)
+    print(msg.Distance)
+    rate.sleep()
