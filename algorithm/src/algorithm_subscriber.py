@@ -10,19 +10,15 @@ def callback(msg):
     print ""
 
 def service_callback(request):
-    response = ServtypeResponse(risk_per = request.risk, stop1 = request.danger1, stop2 = request.danger2, stop3 = request.danger3)
+    response = ServtypeResponse(risk = request.heating/10 + (100-request.battery), stop1 = request.danger1 == True and request.danger2 == True)
 
     if response.stop1 == True:
-        print "Risk is high!"
-    if response.stop2 == True:
-        print "Low battery!"
-    if response.stop3 == True:
-        print "Overheating!"
-    if response.stop1 == True and response.stop2 == True and response.stop3 == True:
-	print "Risk :", response.risk_per, "Danger! You should better Stop!!"
+        print "Danger! You should better Stop!! | risk :", response.risk, "battery :", request.battery, "heat :", request.heating
+
+    elif response.risk >= 60:
+        print "Warning! Be careful! | risk :", response.risk, "battery :", request.battery, "heat :", request.heating 
 
     return response
-
 
 
 rospy.init_node('Algorithm')

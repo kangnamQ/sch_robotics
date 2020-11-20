@@ -1,12 +1,8 @@
-float32 risk
-float32 battery
-float32 heating
+float64 battery
+float64 heating
 bool danger1
 bool danger2
-bool danger3
 ---
-float32 risk_per
+float64 risk
 bool stop1
-bool stop2
-bool stop3
 
