@@ -1,3 +1,4 @@
+float32 risk
 float32 battery
 float32 heating
 bool danger1
