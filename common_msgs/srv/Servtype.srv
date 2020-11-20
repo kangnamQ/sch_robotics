@@ -1,8 +1,10 @@
-float64 battery
-float64 overheating
-bool error1
-bool eroor2
----
 float64 risk
+float64 battery
+float64 heating
+bool danger1
+bool danger2
+bool danger3
+---
+float64 risk_per
 bool stop
 
