@@ -7,7 +7,7 @@ from common_msgs.srv import Servtype, ServtypeRequest
 
 
 rospy.init_node('Sensor')
-requester = rospy.ServiceProxy("Stop", Servtype)
+requester = rospy.ServiceProxy('Status', Servtype)
 
 pub = rospy.Publisher('Msgs_msg', Mesgtype, queue_size=1)
 msg = Mesgtype()
@@ -64,6 +64,7 @@ while not rospy.is_shutdown():
     print "Time :", msg.timestamp.secs%100
     print "Speed | x :", msg.Speed.x, "| y :", msg.Speed.y, "| z :", msg.Speed.z
     print "Distance :", msg.Distance.data, "m"
+    print ""
     rate.sleep()
 
 

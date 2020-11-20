@@ -6,5 +6,7 @@ bool danger2
 bool danger3
 ---
 float64 risk_per
-bool stop
+bool stop1
+bool stop2
+bool stop3
 
