@@ -21,10 +21,6 @@ count = 0
 battery_ = 100.0
 heating_ = 0.0
 
-req = ServtypeRequest(battery = battery_, heating = heating_, danger1 = False, danger2 = False)
-req = res = requester(req)
-print "status | battery :", battery_, "heating_ :", heating_
-
 
 while not rospy.is_shutdown():
     count += 1 
@@ -36,24 +32,35 @@ while not rospy.is_shutdown():
     msg.Distance.data = msg.Distance.data + msg.Speed.x + msg.Speed.y
     pub.publish(msg)
 
-    battery_ -= 2.5
-    heating_ += 3
+    battery_ -= 1.5
+    heating_ += 2
     
-    if battery_ <= 20 and heating_ >= 80:
+    if battery_ <= 0 or heating_ >= 100:
         req = ServtypeRequest(battery = battery_, heating = heating_, danger1 = True, danger2 = True)
         res = requester(req)
-        print "Danger! You should better Stop!! | risk :", res.risk, "battery :", req.battery, "heat :", req.heating 
+        print "Danger! Turn off! | risk :", res.risk, "battery :", req.battery, "heat :", req.heating
+        break
 
-    if battery_ <= 20:
+    elif battery_ <= 5 or heating_ >= 95:
+        req = ServtypeRequest(battery = battery_, heating = heating_, danger1 = True, danger2 = True)
+        res = requester(req)
+        print "Danger! You should better Stop!! | risk :", res.risk, "battery :", req.battery, "heat :", req.heating
+        
+    elif battery_ <= 15:
         req = ServtypeRequest(battery = battery_, heating = heating_, danger2 = True)
         res = requester(req)
-        print "Low battery!  | risk :", res.risk, "battery :", req.battery
-            
-    if heating_ >= 80:
+        print "Warning! Be careful! Low battery!  | risk :", res.risk, "battery :", req.battery
+
+    elif heating_ >= 75:
         req = ServtypeRequest(battery = battery_, heating = heating_, danger1 = True)
         res = requester(req)
-        print "Overheating!  |risk :", res.risk, "heat :", req.heating
+        print "Warning! Be careful! Overheating!  |risk :", res.risk, "heat :", req.heating
 
+    else:
+        req = ServtypeRequest(battery = battery_, heating = heating_, danger1 = False, danger2 = False)
+        res = requester(req)
+
+    
 
     print "Time :", msg.Runtime.data, "s"
     print "Speed | x :", msg.Speed.x, "| y :", msg.Speed.y, "| z :", msg.Speed.z

@@ -9,15 +9,19 @@ def callback(msg):
     print "Distance :", msg.Distance.data, "m"
     print ""
 
+
 def service_callback(request):
     response = ServtypeResponse(risk = request.heating/10 + (100-request.battery), stop1 = request.danger1 == True and request.danger2 == True)
 
-    if response.stop1 == True:
+    if response.risk >= 106:
+        print "Danger! Turn off! | risk :", response.risk, "battery :", request.battery, "heat :", request.heating
+
+    elif response.stop1 == True:
         print "Danger! You should better Stop!! | risk :", response.risk, "battery :", request.battery, "heat :", request.heating
 
-    elif response.risk >= 60:
+    elif response.risk >= 80:
         print "Warning! Be careful! | risk :", response.risk, "battery :", request.battery, "heat :", request.heating 
-
+         
     return response
 
 
