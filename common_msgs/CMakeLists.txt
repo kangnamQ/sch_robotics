@@ -14,6 +14,11 @@ add_message_files(
   Mesgtype.msg
 )
 
+add_service_files(
+  FILES
+  Servtype.srv
+)
+
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
