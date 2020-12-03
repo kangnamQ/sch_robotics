@@ -32,12 +32,15 @@ $ git clone https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver.git
 $ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 $ git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
 $ git clone -b noetic-devel https://github.com/ros/joint_state_publisher.git
-$ cd ~/catkin_ws/src/turtlebot3
-$ sudo rm -r turtlebot3_description/ turtlebot3_teleop/ turtlebot3_navigation/ turtlebot3_slam/ turtlebot3_example/
+
+$ cd ~/catkin_ws/
+$ rm -rf build/ devel/
+$ cd ~/catkin_ws && catkin_make -j1
 
 $ cd ~/catkin_ws
 $ catkin build
 
-
 $ source ~/.bashrc
 $ rosrun turtlebot3_bringup create_udev_rules
+
+

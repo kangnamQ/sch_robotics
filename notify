@@ -1,0 +1,32 @@
+
+Following this URL
+https://discourse.ros.org/t/announcing-turtlebot3-software-v1-0-0-and-firmware-v1-2-0-update/4888
+----
+$ cd ~/catkin_ws/src/
+$ rm -rf turtlebot3/ turtlebot3_msgs/ hls_lfcd_lds_driver/
+
+$ git clone https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver.git
+$ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+$ git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+
+$ cd ~/catkin_ws/
+$ rm -rf build/ devel/
+$ cd ~/catkin_ws && catkin_make -j1
+
+pip upgrade
+/home/pi/.pyenv/versions/3.7.9/envs/rospy3/bin/python3.7 -m pip install --upgrade pip
+
+/
+try update & upgrade
+sudo apt-get update
+sudo apt-get upgrade
+
+/
+$ catkin create pkg self_drive --catkin-deps rospy std_msgs sensor_msgs geometry_msgs
+$ cd self_drive/src
+$ touch self_drive.py
+$ chmod a+x self_drive.py
+
+//
+write package.xml CMakeLists.txt
+and self_drive
