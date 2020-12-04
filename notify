@@ -267,3 +267,81 @@ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 
 not working...
 omg.. 
+
+
+pyenv deactivate rospy3
+
+1. roslaunch turtlebot3_bringup turtlebot3_model.launch
+
+
+2. roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch --screen
+-> keybord not working...
+if push w in keybord, then
+
+
+3.roslaunch turtlebot3_bringup turtlebot3_robot.launch.
+
+Error : ImportError: cannot import name 'Serial' from 'serial' (/home/pi/.pyenv/versions/3.7.9/lib/python3.7/site-packages/serial/__init__.py)
+
+=> pip3 install serial, Serial 
+=>> still Error
+
+so
+=>>> install serial in pyenv (rospy3)
+try : pyenv activate rospy3
+try : roslaunch turtlebot3_bringup turtlebot3_robot.launch
+then :
+[ERROR] [1607063691.711857]: Cannot import package : tf
+
+[ERROR] [1607063691.721708]: sys.path was ['/home/pi/catkin_ws/src/rosserial/rosserial_python/src', '/home/pi/catkin_ws/src/rosserial/rosserial_python/nodes', '/home/pi/catkin_ws/devel/lib/python2.7/dist-packages', '/opt/ros/melodic/lib/python2.7/dist-packages', '/home/pi/.pyenv/versions/3.7.9/lib/python37.zip', '/home/pi/.pyenv/versions/3.7.9/lib/python3.7', '/home/pi/.pyenv/versions/3.7.9/lib/python3.7/lib-dynload', '/home/pi/.pyenv/versions/rospy3/lib/python3.7/site-packages']
+
+[ERROR] [1607063691.727144]: Creation of publisher failed: 'NoneType' object has no attribute 'msg'
+
+[ERROR] [1607063691.781164]: Tried to publish before configured, topic id 133
+
+=> Sitll have Error
+
+rostopic list
+rqt_graph
+rostopic type /scan
+rostopic type /imu
+rostopic type /cmd_vel
+rostopic type /diagnostics
+rostopic info /scan
+rostopic info /imu
+rostopic info /cmd_vel
+rostopic info /diagnostics
+
+sensor_msgs/LaserScan
+sensor_msgs/Imu
+
+rostopic info /scan
+Type: sensor_msgs/LaserScan
+Publishers: 
+ * /turtlebot3_lds (http://localhost:46029/)
+Subscribers: 
+ * /turtlebot3_diagnostics (http://localhost:33899/)
+
+rostopic info /imu
+Type: sensor_msgs/Imu
+Publishers: 
+ * /turtlebot3_core (http://localhost:37629/)
+Subscribers: 
+ * /turtlebot3_diagnostics (http://localhost:33899/)
+
+
+
+problem 1.
+but have tf, of tensorflow...
+pip list -> tf 1.12.1  // tensorflow 1.14.0
+
+problem 2.
+msg error...
+sensor_msgs/LaserScan
+sensor_msgs/Imu
+[ERROR] [1607063691.727144]: Creation of publisher failed: 'NoneType' object has no attribute 'msg'
+[ERROR] [1607063691.781164]: Tried to publish before configured, topic id 133
+
+
+
+
