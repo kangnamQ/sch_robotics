@@ -35,7 +35,7 @@ $ git clone -b noetic-devel https://github.com/ros/joint_state_publisher.git
 
 $ cd ~/catkin_ws/
 $ rm -rf build/ devel/
-$ cd ~/catkin_ws && catkin_make -j1
+$ cd ~/catkin_ws && catkin_make
 
 $ cd ~/catkin_ws
 $ catkin build
