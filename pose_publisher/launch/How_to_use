@@ -1,0 +1,9 @@
+cd /home/pi/catkin_ws/src/pose_publisher/launch
+
+roslaunch pose_publisher moving_pose.launch --screen
+-> moving pose
+
+roslaunch pose_publisher pose_array.launch --screen
+-> pose array
+
+publisher + rviz 
