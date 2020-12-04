@@ -223,6 +223,7 @@ sudo ./install.sh
 sudo ./uninstall.sh
 sudo ./install.sh
 
+
 => same.
 
 ha...  what's the problem...?
@@ -344,4 +345,63 @@ sensor_msgs/Imu
 
 
 
+>>>
+
+roslaunch turtlebot3_bringup turtlebot3_robot.launch
+
+했는데 오류가 난다면
+
+홈에서
+
+mkdir rosserial
+
+cd rosserial
+
+$rosinstall_generator rosserial --rosdistro melodic --deps --wet-only --tar > melodic-rosserial-wet.rosinstall
+$ wstool init src melodic-rosserial-wet.rosinstall
+
+$ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic
+
+
+///
+delete Arduino
+=> sudo ./uninstall.sh
+
+
+
+
+but still error
+=> Failed to process package 'tf' :
+
+so following this URL :
+https://github.com/ros/geometry2/issues/293
+
+cd catkin_ws
+cd src 
+git clone https://github.com/ros/geometry
+git clone https://github.com/ros/geometry2
+cd ..
+virtualenv -p /usr/bin/python3 venv
+source venv/bin/activate
+pip install catkin_pkg pyyaml empy rospkg numpy
+cm ( catkin build )
+source devel/setup.bash
+
+
+
+->
+but still have error of
+from serial import Serial, SerialException, SerialTimeoutException
+ImportError: cannot import name 'Serial' from 'serial' (/home/pi/.pyenv/versions/3.7.9/lib/python3.7/site-packages/serial/__init__.py)
+[turtlebot3_core-1] process has died [pid 29542, exit code 1, cmd /home/pi/catkin_ws/src/rosserial/rosserial_python/nodes/serial_node.py __name:=turtlebot3_core __log:=/home/pi/.ros/log/4f39b7b6-3618-11eb-b934-dca63240c01f/turtlebot3_core-1.log].
+log file: /home/pi/.ros/log/4f39b7b6-3618-11eb-b934-dca63240c01f/turtlebot3_core-1*.log
+
+.....?
+
+=> so try again : 
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic
+
+
+still error
+<== Failed to process package 'tf': 
 
