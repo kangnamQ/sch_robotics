@@ -1,5 +1,5 @@
 # Final_Project
-Final_Project - Make a self-driving robot. (feat. turtlebot3 burger)
+Final_Project - Make a self-driving robot.
 
 
 First.
@@ -39,6 +39,7 @@ $ cd ~/catkin_ws && catkin_make
 
 $ cd ~/catkin_ws
 $ catkin build
+=> use "cm"
 
 $ source ~/.bashrc
 $ rosrun turtlebot3_bringup create_udev_rules
