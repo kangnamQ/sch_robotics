@@ -14,7 +14,7 @@ class SelfDrive:
         # scan 분석 후 속도 결정
         # ...
         left_scan_30 = 0
-        for i in range(30):
+        for i in range(30):t
             # print(f"{i}_th angle : ", scan.ranges[i])
             left_scan_30 += scan.ranges[i]
         mean_left_scan_30 = left_scan_30 / 30
