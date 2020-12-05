@@ -37,3 +37,8 @@ alias ga='git add .'
 alias gs='git status'
 alias gb='git branch'
 alias gd='git diff'
+
+
+alias pa='pyenv activate rospy3'
+alias pd='pyenv deactivate rospy3'
+alias pc='python --version && pyenv version'
