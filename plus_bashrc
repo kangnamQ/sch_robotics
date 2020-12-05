@@ -1,0 +1,39 @@
+Make working space
+
+alias pycharm="/opt/pycharm-community-2020.2.3/bin/pycharm.sh"
+export PATH=" /home/pi/.local/bin:$PATH"
+
+#working
+alias cw='cd ~/catkin_ws'
+alias cs='cd ~/catkin_ws/src'
+alias cm='cd ~/catkin_ws && catkin build'
+alias ff='cd ~/catkin_ws/src/Final_Project'
+alias bs='gedit ~/.bashrc'
+
+#reflesh
+alias s0='source ~/.bashrc'
+alias s1='source ~/catkin_ws/devel/setup.bash'
+
+source /opt/ros/melodic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+export ROS_MASTER_URI=http://localhost:11311
+export ROS_HOSTNAME=localhost
+export TURTLEBOT3_MODEL=burger
+
+export PATH="/home/pi/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+alias tele='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'
+
+#use test
+alias r0='roscore'
+alias r1='roslaunch turtlebot3_bringup turtlebot3_robot.launch'
+alias r2='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch --screen'
+alias r3='roslaunch turtlebot3_bringup turtlebot3_model.launch'
+alias r4= 'rqt_graph'
+
+alias g1='gedit ~/catkin_ws/src/Final_Project/src/avoider.py'
+alias ga='git add .'
+alias gs='git status'
+alias gb='git branch'
+alias gd='git diff'
