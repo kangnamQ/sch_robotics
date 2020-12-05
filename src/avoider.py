@@ -1,8 +1,8 @@
 #!/home/pi/.pyenv/versions/rospy3/bin/python
 
 import rospy
-from geometry_msgs.msg import Twist
-from sensor_msgs.msg import LaserScan
+from geometry_msgs.msg import Twist         #move wheel
+from sensor_msgs.msg import LaserScan       #sacn
 
 class SelfDrive:
     def __init__(self, publisher):
@@ -34,7 +34,7 @@ class SelfDrive:
 
 
 def main():
-    rospy.init_node('self_drive')
+    rospy.init_node('Final_Project')
     publisher = rospy.Publisher('cmd_vel', Twist, queue_size=1)
     driver = SelfDrive(publisher)
     subscriber = rospy.Subscriber('scan', LaserScan,
