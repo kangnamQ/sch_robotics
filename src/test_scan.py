@@ -3,8 +3,6 @@
 import rospy
 from geometry_msgs.msg import Twist  # move wheel
 from sensor_msgs.msg import LaserScan  # sacn
-
-
 # laserscan data -> Twist -> robot move
 
 class SelfDrive:
@@ -14,8 +12,6 @@ class SelfDrive:
 
     def lds_callback(self, scan):
         # scan 분석 후 속도 결정
-        # ...
-        left_scan_30 = 0
         scan_data = []
         for n in range(360):
             scan_data.append(scan.ranges[n])
@@ -31,43 +27,48 @@ class SelfDrive:
         #각 범위마다 각각에 리스트에 스캔값을 받습니다.
         for f in range(-20, 20):
             scan_front.append(scan.ranges[f])
+        front = sum(scan_front) / len(scan_front)
         for fl in range(20, 75):
             scan_fleft.append(scan.ranges[fl])
+        fleft = sum(scan_fleft) / len(scan_fleft)
         for l in range(75, 105):
             scan_left.append(scan.ranges[l])
+        left = sum(scan_left) / len(scan_left)
         for fr in range(-75, -20):
             scan_fright.append(scan.ranges[fr])
+        fright = sum(scan_fright) / len(scan_fright)
         for r in range(-105, -75):
             scan_right.append(scan.ranges[r])
+        right = sum(scan_right) / len(scan_right)
 
         #주로 어디부분이 닿았는지 확인할 수 있는 print 문입니다. 확인을 위해 넣었습니다.
-        if min(scan_front) < 0.5:
-            print("scan_front < 0.5 !!")
-        if min(scan_fleft) < 0.5:
-            print("scan_fleft < 0.5 !!")
-        if min(scan_left) < 0.5:
-            print("scan_left < 0.5 !!")
-        if min(scan_fright) < 0.5:
-            print("scan_fright < 0.5 !!")
-        if min(scan_right) < 0.5:
-            print("scan_right < 0.5 !!")
+        if front < 0.5:
+            print("front < 0.5 !!")
+        if fleft < 0.1:
+            print("fleft < 0.1 !!")
+        if left < 0.2:
+            print("left < 0.2 !!")
+        if fright < 0.3:
+            print("fright < 0.3 !!")
+        if right < 0.4:
+            print("right < 0.4 !!")
 
         turtle_vel = Twist()
 
         #앞, 왼쪽, 오른쪽에 모두 벽이 있다면 돌면서 빈공간을 찾기 위한 함수입니다.
-        if min(scan_front) < 0.3 and min(scan_fleft) < 0.5 and min(scan_fright) < 0.5:
+        if front < 0.3 and left < 0.5 and right < 0.5:
             turtle_vel.linear.x = 0.0
-            turtle_vel.angular.z = 1.0
+            turtle_vel.angular.z = 1.0  # + => turn left / - => turn right
             self.publisher.publish(turtle_vel)
             print("all wall! turn")
         #앞과 왼쪽에 장애물이 있을 경우 우회전을 합니다.
-        elif min(scan_front) < 0.3 and min(scan_fleft)  < 0.5 :
+        elif front < 0.3 and left < 0.5:
             turtle_vel.linear.x = 1.0
             turtle_vel.angular.z = -1.0
             self.publisher.publish(turtle_vel)
             print("turn right!")
         #앞과 오른쪽에 장애물이 있을 경우 좌회전을 합니다.
-        elif min(scan_front) < 0.3 and min(scan_fright) < 0.5 :
+        elif front < 0.3 and right < 0.5:
             turtle_vel.linear.x = 1.0
             turtle_vel.angular.z = 1.0
             self.publisher.publish(turtle_vel)
