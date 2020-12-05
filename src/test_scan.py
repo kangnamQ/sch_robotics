@@ -51,6 +51,11 @@ class SelfDrive:
 
         turtle_vel = Twist()
 
+	turtle_vel.linear.x=0.0
+	turtle_vel.angular.z=0.0
+	self.publisher.publish(turtle_vel)
+	
+
         # 속도 출력
 
 
