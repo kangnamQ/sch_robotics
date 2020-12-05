@@ -61,13 +61,13 @@ class SelfDrive:
             self.publisher.publish(turtle_vel)
             print("all wall! turn")
         #앞과 왼쪽에 장애물이 있을 경우 우회전을 합니다.
-        elif min(scan_front) < 0.3 and min(scan_fleft)  :
+        elif min(scan_front) < 0.3 and min(scan_fleft)  < 0.5 :
             turtle_vel.linear.x = 1.0
             turtle_vel.angular.z = -1.0
             self.publisher.publish(turtle_vel)
             print("turn right!")
         #앞과 오른쪽에 장애물이 있을 경우 좌회전을 합니다.
-        elif min(scan_front) < 0.3 and min(scan_fright)  :
+        elif min(scan_front) < 0.3 and min(scan_fright) < 0.5 :
             turtle_vel.linear.x = 1.0
             turtle_vel.angular.z = 1.0
             self.publisher.publish(turtle_vel)
