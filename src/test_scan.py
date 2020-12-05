@@ -4,7 +4,6 @@ import rospy
 from geometry_msgs.msg import Twist  # move wheel
 from sensor_msgs.msg import LaserScan  # sacn
 import numpy as np
-
 # laserscan data -> Twist -> robot move
 
 class SelfDrive:
@@ -36,7 +35,7 @@ class SelfDrive:
         for r in range(-60,-30):
             scan_right = np.append(scan_right, np.array(scan.ranges[r]))
         for f in range(-15,15):
-            scan_front = np.append(scan_front, np.array(scan.ranges[r]))
+            scan_front = np.append(scan_front, np.array(scan.ranges[f]))
 
         if np.min(scan_front) < 2:
             print("scan_front < 2 !!")
@@ -51,12 +50,16 @@ class SelfDrive:
 
         turtle_vel = Twist()
 
-	turtle_vel.linear.x=0.0
-	turtle_vel.angular.z=0.0
-	self.publisher.publish(turtle_vel)
-	
+        if np.min(scan_front) < 2:
+            turtle_vel.linear.x=0.0
+            turtle_vel.angular.z=0.0
+            self.publisher.publish(turtle_vel)
 
-        # 속도 출력
+        else:
+            turtle_vel.linear.x=2.0
+            turtle_vel.angular.z=0.0
+            self.publisher.publish(turtle_vel)
+	
 
 
 def main():
