@@ -37,3 +37,16 @@ alias ga='git add .'
 alias gs='git status'
 alias gb='git branch'
 alias gd='git diff'
+
+
+alias pa='pyenv activate rospy3'
+alias pd='pyenv deactivate rospy3'
+alias pv='python --version && pyenv version'
+alias pc='pycharm .'
+
+
+alias ww='cd ~/catkin_ws/src/Final_Project/src && pycharm .'
+
+alias w1='rosrun Final_Project avoider.py'
+alias w2='rosrun Final_Project stop.py'
+alias w3='rosrun Final_Project test_scan.py'
