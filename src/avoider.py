@@ -56,28 +56,44 @@ class SelfDrive:
         turtle_vel = Twist()
 
         #앞, 왼쪽, 오른쪽에 모두 벽이 있다면 돌면서 빈공간을 찾기 위한 함수입니다.
-        if front < 0.3 and left < 0.3 and right < 0.3:
+        if front < 0.3 and left < 0.6 and right > 0.5:
+            turtle_vel.linear.x = 0.0
+            turtle_vel.angular.z = -2.0  # + => turn left / - => turn right
+            self.publisher.publish(turtle_vel)
+            print("left will have wall! turn right!")
+        elif front < 0.3 and left > 0.5 and right < 0.6:
             turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = 2.0  # + => turn left / - => turn right
             self.publisher.publish(turtle_vel)
-            print("all wall! turn")
+            print("left will have wall! turn left!")
         #앞과 왼쪽에 장애물이 있을 경우 우회전을 합니다.
-        elif front < 0.3 and fleft < 0.3:
+        elif fleft < 0.3 and front < 0.3:
             turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = -2.0
             self.publisher.publish(turtle_vel)
             print("turn right!")
+        elif fleft < 0.3 and left < 0.3:
+            turtle_vel.linear.x = 0.0
+            turtle_vel.angular.z = -1.0
+            self.publisher.publish(turtle_vel)
+            print("turn right!")
         #앞과 오른쪽에 장애물이 있을 경우 좌회전을 합니다.
-        elif front < 0.3 and fright < 0.3:
+        elif fright < 0.3 and front < 0.3:
             turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = 2.0
             self.publisher.publish(turtle_vel)
             print("turn left!")
-        elif front < 0.3 and left > 0.3 and right > 0.3 :
+        elif fright < 0.3 and right < 0.3:
+            turtle_vel.linear.x = 0.0
+            turtle_vel.angular.z = 1.0
+            self.publisher.publish(turtle_vel)
+            print("turn left!")
+        elif front < 0.3:
             turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = 2.0
             self.publisher.publish(turtle_vel)
             print("turn left!")
+
         #아무것도 하지 않을 때는 (일단 테스트라서) 정지하게끔 만들었습니다.
         else:
             turtle_vel.linear.x = 2.0

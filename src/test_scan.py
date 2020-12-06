@@ -83,7 +83,7 @@ class SelfDrive:
             print("front < 0.5 !!")
         if fleft < 0.5:
             print("fleft < 0.5 !!")
-        if left < 0.5
+        if left < 0.5:
             print("left < 0.5 !!")
         if fright < 0.5:
             print("fright < 0.5 !!")
