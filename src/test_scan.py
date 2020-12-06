@@ -16,6 +16,8 @@ class SelfDrive:
         for n in range(360):
             scan_data.append(scan.ranges[n])
             print(f"{n}_th angle : ", scan.ranges[n])
+        for i in range(len(scan_data)):
+            if scan_data[i] < 0.3
 
         #초기 함수 설정, 3부분으로 나누어서 진행하려고 하기 떄문에 줄이 늘어났습니다.
         scan_front = []  # -20~20
@@ -42,42 +44,54 @@ class SelfDrive:
         right = sum(scan_right) / len(scan_right)
 
         #주로 어디부분이 닿았는지 확인할 수 있는 print 문입니다. 확인을 위해 넣었습니다.
-        if front < 0.3:
-            print("front < 0.5 !!")
-        if fleft < 0.3:
-            print("fleft < 0.1 !!")
-        if left < 0.3:
+        if front < 0.2:
+            print("front < 0.2 !!")
+        if fleft < 0.2:
+            print("fleft < 0.2 !!")
+        if left < 0.2:
             print("left < 0.2 !!")
+        if fright < 0.2:
+            print("fright < 0.2 !!")
+        if right < 0.2:
+            print("right < 0.2 !!")
+
+        if front < 0.3:
+            print("front < 0.3 !!")
+        if fleft < 0.3:
+            print("fleft < 0.3 !!")
+        if left < 0.3:
+            print("left < 0.3 !!")
         if fright < 0.3:
             print("fright < 0.3 !!")
         if right < 0.3:
+            print("right < 0.3 !!")
+
+        if front < 0.4:
+            print("front < 0.4 !!")
+        if fleft < 0.4:
+            print("fleft < 0.4 !!")
+        if left < 0.4:
+            print("left < 0.4 !!")
+        if fright < 0.4:
+            print("fright < 0.4 !!")
+        if right < 0.4:
             print("right < 0.4 !!")
 
-        turtle_vel = Twist()
+        if front < 0.5:
+            print("front < 0.5 !!")
+        if fleft < 0.5:
+            print("fleft < 0.5 !!")
+        if left < 0.5
+            print("left < 0.5 !!")
+        if fright < 0.5:
+            print("fright < 0.5 !!")
+        if right < 0.5:
+            print("right < 0.5 !!")
 
-        #앞, 왼쪽, 오른쪽에 모두 벽이 있다면 돌면서 빈공간을 찾기 위한 함수입니다.
-        if front < 0.3 and left < 0.3 and right < 0.3:
-            turtle_vel.linear.x = 0.0
-            turtle_vel.angular.z = 1.0  # + => turn left / - => turn right
-            self.publisher.publish(turtle_vel)
-            print("all wall! turn")
-        #앞과 왼쪽에 장애물이 있을 경우 우회전을 합니다.
-        elif front < 0.3 and left < 0.3:
-            turtle_vel.linear.x = 0.0
-            turtle_vel.angular.z = -1.0
-            self.publisher.publish(turtle_vel)
-            print("turn right!")
-        #앞과 오른쪽에 장애물이 있을 경우 좌회전을 합니다.
-        elif front < 0.3 and right < 0.3:
-            turtle_vel.linear.x = 0.0
-            turtle_vel.angular.z = 1.0
-            self.publisher.publish(turtle_vel)
-            print("turn left!")
-        #아무것도 하지 않을 때는 (일단 테스트라서) 정지하게끔 만들었습니다.
-        else:
-            turtle_vel.linear.x = 2.0
-            turtle_vel.angular.z = 0.0
-            self.publisher.publish(turtle_vel)
+        turtle_vel = Twist()
+        turtle_vel.linear.x = 0.0
+        turtle_vel.angular.z = 0.0
+        self.publisher.publish(turtle_vel)
 
 def main():
     rospy.init_node('Final_Project')
