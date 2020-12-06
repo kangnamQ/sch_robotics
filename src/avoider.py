@@ -13,7 +13,7 @@ class SelfDrive:
     def lds_callback(self, scan):
         # scan 분석 후 속도 결정
         scan_data = []
-        for n in range(360):
+        for n in range(-105,106):
             scan_data.append(scan.ranges[n])
             print(f"{n}_th angle : ", scan.ranges[n])
 
@@ -31,7 +31,7 @@ class SelfDrive:
         for fl in range(20, 75):
             scan_fleft.append(scan.ranges[fl])
         fleft = sum(scan_fleft) / len(scan_fleft)
-        for l in range(75, 105):
+        for l in range(75, 106):
             scan_left.append(scan.ranges[l])
         left = sum(scan_left) / len(scan_left)
         for fr in range(-75, -20):
@@ -63,18 +63,18 @@ class SelfDrive:
             print("all wall! turn")
         #앞과 왼쪽에 장애물이 있을 경우 우회전을 합니다.
         elif front < 0.3 and fleft < 0.3:
-            turtle_vel.linear.x = 0.5
+            turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = -2.0
             self.publisher.publish(turtle_vel)
             print("turn right!")
         #앞과 오른쪽에 장애물이 있을 경우 좌회전을 합니다.
         elif front < 0.3 and fright < 0.3:
-            turtle_vel.linear.x = 0.5
+            turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = 2.0
             self.publisher.publish(turtle_vel)
             print("turn left!")
         elif front < 0.3 and left > 0.3 and right > 0.3 :
-            turtle_vel.linear.x = 0.5
+            turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = 2.0
             self.publisher.publish(turtle_vel)
             print("turn left!")

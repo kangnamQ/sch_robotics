@@ -13,11 +13,13 @@ class SelfDrive:
     def lds_callback(self, scan):
         # scan 분석 후 속도 결정
         scan_data = []
-        for n in range(360):
+        for n in range(-105,105):
             scan_data.append(scan.ranges[n])
-            print(f"{n}_th angle : ", scan.ranges[n])
+            #print(f"{n}_th angle : ", scan.ranges[n])
         for i in range(len(scan_data)):
-            if scan_data[i] < 0.3
+            if scan_data[i] < 0.3:
+                print(f"{i}_th angle : ", scan.ranges[i])
+
 
         #초기 함수 설정, 3부분으로 나누어서 진행하려고 하기 떄문에 줄이 늘어났습니다.
         scan_front = []  # -20~20
@@ -33,7 +35,7 @@ class SelfDrive:
         for fl in range(20, 75):
             scan_fleft.append(scan.ranges[fl])
         fleft = sum(scan_fleft) / len(scan_fleft)
-        for l in range(75, 105):
+        for l in range(75, 106):
             scan_left.append(scan.ranges[l])
         left = sum(scan_left) / len(scan_left)
         for fr in range(-75, -20):
