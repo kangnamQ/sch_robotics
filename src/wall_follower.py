@@ -55,19 +55,19 @@ class SelfDrive:
             turtle_vel.linear.x = 0.0
             turtle_vel.angular.z = -2.0  # + => turn left / - => turn right
             self.publisher.publish(turtle_vel)
-            print("There's something in front of me! turn left!")
+            print("No wall! turn turn right!")
         #만약에 벽을 따라 주행중인데 벽에서 점점 벌어진다면
-        elif right > 0.25 and status == 1 and fright < 0.4:
-            turtle_vel.linear.x = 1.0
-            turtle_vel.angular.z = -1.0  # + => turn left / - => turn right
-            self.publisher.publish(turtle_vel)
-            print("Stick to the wall!")
+        #elif right > 0.25 and status == 1 and fright < 0.4:
+        #    turtle_vel.linear.x = 1.0
+        #    turtle_vel.angular.z = -1.0  # + => turn left / - => turn right
+        #    self.publisher.publish(turtle_vel)
+        #    print("Stick to the wall!")
         #만약에 벽을 따라 주행중인데 벽과 너무 가깝다면
-        elif right < 0.1 and status == 1 and fright < 0.4:
-            turtle_vel.linear.x = 1.0
-            turtle_vel.angular.z = 1.0  # + => turn left / - => turn right
-            self.publisher.publish(turtle_vel)
-            print("Stick to the wall!")
+        #elif right < 0.1 and status == 1 and fright < 0.4:
+        #    turtle_vel.linear.x = 1.0
+        #    turtle_vel.angular.z = 1.0  # + => turn left / - => turn right
+        #    self.publisher.publish(turtle_vel)
+        #    print("Stick to the wall!")
         # 처음 벽을 찾는 부분에서 벽을 만나면 좌회전을합니다. 벽을 만나게 하기 위한 처음 조건입니다.
         elif front < 0.25 and status == 0:
             turtle_vel.linear.x = 0.0

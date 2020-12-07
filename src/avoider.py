@@ -32,13 +32,13 @@ class SelfDrive:
         #앞, 왼쪽, 오른쪽에 모두 벽이 있다면 돌면서 빈공간을 찾기 위한 함수입니다.
         if fleft < 0.3:
             turtle_vel.linear.x = 0.0
-            turtle_vel.angular.z = -2.0
+            turtle_vel.angular.z = -2.5
             self.publisher.publish(turtle_vel)
             print("turn right!")
         #앞과 오른쪽에 장애물이 있을 경우 좌회전을 합니다.
         elif fright < 0.3:
             turtle_vel.linear.x = 0.0
-            turtle_vel.angular.z = 2.0
+            turtle_vel.angular.z = 2.5
             self.publisher.publish(turtle_vel)
             print("turn left!")
         #아무것도 하지 않을 때는 (일단 테스트라서) 정지하게끔 만들었습니다.
