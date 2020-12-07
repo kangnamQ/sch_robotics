@@ -14,7 +14,7 @@ class SelfDrive:
         scan_data = []
         for n in range(-105,106):
             scan_data.append(scan.ranges[n])
-            if scan.ranges[n] < 0.3
+            if scan.ranges[n] < 0.3:
                 print(f"{n}_th angle < 0.3 : ", scan.ranges[n])
 
         #초기 함수 설정, 3부분으로 나누어서 진행하려고 하기 떄문에 줄이 늘어났습니다.
