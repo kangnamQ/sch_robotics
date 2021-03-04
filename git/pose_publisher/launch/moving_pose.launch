@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="pose_publisher" type=pub_moving_pose.py name="pub_moving_pose"/>
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find pose_publisher)/rviz/moving_pose.rviz"/>
+</launch>
