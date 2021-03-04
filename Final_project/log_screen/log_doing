@@ -1,0 +1,31 @@
+log doing
+----------
+
+Make New work space : 
+cd ~/catkin_ws/src/
+git clone https://github.com/kangnamQ/Final_Project.git
+=>cd ~/catkin_ws/src/Final_Project 
+
+git config user.name "Kang"
+git config user.email "kangnamgyusch@gmail.com"
+git config --list
+git status
+
+make workspace
+rename and modify file
+
+cm (catkin build)
+
+git add .
+git commit -m "New work space. git clone"
+git branch 
+=> *main
+
+git commit -m "make work space. and some rename, pakge name,dir... etc. // anyway, now i'm working to new branch that avoider"
+
+=> it's setting workspace. so working main branch.
+
+///
+
+
+
