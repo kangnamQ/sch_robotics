@@ -1,0 +1,50 @@
+sensor-scan distance info
+
+front
+for f in range(-20, 20):
+    scan_front.append(scan.ranges[f])
+front = sum(scan_front) / len(scan_front)
+0.5 => 26cm
+0.4 => 21cm
+0.3 => 17cm
+0.2 => 10cm
+
+
+fleft
+for fl in range(20, 75):
+    scan_fleft.append(scan.ranges[fl])
+fleft = sum(scan_fleft) / len(scan_fleft)
+0.5 => 13cm
+0.4 => 11cm
+0.3 => 9cm
+0.2 => 8cm
+
+
+left
+for l in range(75, 106):
+    scan_left.append(scan.ranges[l])
+left = sum(scan_left) / len(scan_left)
+0.5 => 26cm
+0.4 => 23cm
+0.3 => 19cm
+0.2 => 10cm
+
+
+fright
+for fr in range(-75, -20):
+    scan_fright.append(scan.ranges[fr])
+fright = sum(scan_fright) / len(scan_fright)
+0.5 => 15cm
+0.4 => 10cm
+0.3 => 5cm
+0.2 => 2cm
+
+
+right
+for r in range(-105, -75):
+    scan_right.append(scan.ranges[r])
+right = sum(scan_right) / len(scan_right)
+0.5 => 33cm
+0.4 => 27cm
+0.3 => 20cm
+0.2 => 10cm

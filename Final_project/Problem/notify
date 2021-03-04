@@ -1,0 +1,407 @@
+
+Following this URL
+https://discourse.ros.org/t/announcing-turtlebot3-software-v1-0-0-and-firmware-v1-2-0-update/4888
+----
+$ cd ~/catkin_ws/src/
+$ rm -rf turtlebot3/ turtlebot3_msgs/ hls_lfcd_lds_driver/
+
+$ git clone https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver.git
+$ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+$ git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+
+$ cd ~/catkin_ws/
+$ rm -rf build/ devel/
+$ cd ~/catkin_ws && catkin init
+$ cd ~/catkin_ws && catkin_build
+=> that memo like "cd ~/catkin_ws && catkin_make -j1"
+but catkin_make will make Error...
+
+
+pip upgrade
+/home/pi/.pyenv/versions/3.7.9/envs/rospy3/bin/python3.7 -m pip install --upgrade pip
+
+/
+try update & upgrade
+sudo apt-get update
+sudo apt-get upgrade
+
+/
+$ catkin create pkg self_drive --catkin-deps rospy std_msgs sensor_msgs geometry_msgs
+$ cd self_drive/src
+$ touch self_drive.py
+$ chmod a+x self_drive.py
+
+//
+write package.xml CMakeLists.txt
+and self_drive
+
+
+// pyenv 
+pyenv activate rospy3
+pyenv deactivate rospy3
+
+//
+turtlebot3 test
+$ roscore
+
+# 새 탭 열고(ctrl+shit+T), 터틀봇의 경로와 LiDAR 정보를 볼 수 있는 rqt 실행
+$ roslaunch turtlebot3_bringup turtlebot3_model.launch
+
+# 새 탭 열고(ctrl+shit+T), 터틀봇을 조종할 수 있는 노드, 실행 후 키보드 입력으로 속도를 제어
+$ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch --screen
+=>Error No module named 'yaml'
+-> pip3 install yaml
+-> pip3 install pyyaml / pyaml
+=> upgrade error
+
+-> /home/pi/.pyenv/versions/3.7.9/bin/python3.7 -m pip install --upgrade pip
+=> pip3 install pyyaml
+
+=>Error No module named 'rospkg'
+-> pip3 install rospkg
+
+and not wokng moter..
+
+
+# 로봇에서 odometry와 lds 토픽 발행
+$ roslaunch turtlebot3_bringup turtlebot3_robot.launch
+=>ERROR: cannot launch node of type [rosserial_python/serial_node.py]: rosserial_python
+rospack list-names
+
+install Arduino...
+following this URL :
+https://www.intorobotics.com/how-to-install-ros-melodic-rosserial-and-more-on-raspberry-pi-4-raspbian-buster/
+=> sudo apt-get install lshw
+
+download IDE 1.8.12 :
+https://www.arduino.cc/en/Main/OldSoftwareReleases#previous
+
+$ cd /home/pi/Downloads
+extract the file of xz
+
+$sudo mv arduino-1.8.12 /opt/arduino-1.8.12
+$cd ~
+$cd /opt/arduino-1.8.12
+$sudo ./install.sh
+//
+
+$sudo apt-get update && sudo apt-get upgrade
+$cd catkin_ws/src
+$git clone https://github.com/ros-drivers/rosserial.git
+$cd ~/catkin_ws/
+$catkin build
+///
+use : pyenv activate rospy3
+
+ModuleNotFoundError: No module named 'serial'
+pip3 install serial
+cannot import name 'Serial' from 'serial' (/home/pi/.pyenv/versions/3.7.9/lib/python3.7/site-packages/serial/__init__.py)
+=> pyenv activate rospy3
+=>> pip3 install serial
+=>>> X
+
+=> python3 -m pip install pyserial
+=> Cannot import package : tf
+=> Creation of publisher failed: 'NoneType' object has no attribute 'msg'
+
+Follwing this URL :
+https://www.tensorflow.org/install/pip?hl=ko#system-install
+
+=>> pip install --upgrade tensorflow
+=>>> python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+-> no working...
+=> pyenv deactivate rospy3
+=>> pip3 install --user --upgrade tensorflow (install $Home)
+=>>> python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+=>>>> pyenv activate rospy3
+
+????
+why still have error...
+already have tf and tensorflow... 
+and why pub 133 have error...
+
+==> no pyenv => error to serial...
+==> pyenv => not import tf and ...
+
+-----
+ok it's not working...
+
+
+
+sudo apt-get install ntpdate
+sudo ntpdate ntp.ubuntu.com
+sudo raspi-config
+sudo dpkg --add-architecture armhf
+sudo apt-get update
+sudo apt-get install libc6:armhf
+export OPENCR_PORT=/dev/ttyACM0
+export OPENCR_MODEL=burger
+rm -rf ./opencr_update.tar.bz2
+wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/raw/master/turtlebot3/ROS1/latest/opencr_update.tar.bz2 
+tar -xvf opencr_update.tar.bz2 
+cd ./opencr_update
+./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
+
+=> [NG] Fail to jump to boot
+
+port list
+ls -l /dev
+export OPENCR_PORT=/dev/serial1
+./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
+
+=> cmd_read_board_name fail : 0xF020
+
+
+Following this URL :
+https://emanual.robotis.com/docs/en/parts/controller/opencr10/#firmware-recovery-mode
+
+wget https://raw.githubusercontent.com/ROBOTIS-GIT/OpenCR/master/99-opencr-cdc.rules
+sudo cp ./99-opencr-cdc.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+sudo apt-get install libncurses5-dev:i386
+
+=> Unable to locate package libncurses5-dev:i386
+....
+gedit .bashrc
+export PATH=$PATH:$opt/arduino-1.8.12
+
+arduino
+cannot execute binary file: Exec format error
+.....
+sudo apt-get --purge remove arduino
+sudo apt-get autoremove
+sudo apt-get clean
+
+rm -rf arduino-1.8.12/
+=> Permission denied
+....
+=>> sudo rm -rf arduino-1.8.12/
+
+cd
+mkdir tools
+cd ~/Downloads
+cp ./arduino-1.8.2-linuxarm.tar.xz ~/tools
+cd ~/tools
+tar xvf arduino-1.8.2-linuxarm.tar.xz
+...??????? 
+cd arduino-1.8.12
+./install.sh
+
+=> failed to create symbolic link '/usr/local/bin/arduino': File exists
+Adding symlink failed. Hope that's OK. If not then rerun as root with sudo.
+
+=> sudo ./install.sh
+
+....
+-> uninstall again
+and downloads 1.8.13 ver with https://www.arduino.cc/en/donate/https://www.arduino.cc/en/donate/
+
+
+cd ~/Downloads
+cp ./arduino-1.8.13-linux32.tar.xz /opt
+=> cp: cannot create regular file '/opt/arduino-1.8.13-linux32.tar.xz': Permission denied
+
+sudo cp ./arduino-1.8.13-linux32.tar.xz /opt
+cd /opt
+sudo tar xvf arduino-1.8.13-linux32.tar.xz
+cd arduino-1.8.13/
+sudo ./install.sh
+
+=> still
+failed to create symbolic link '/usr/local/bin/arduino': File exists
+
+extract 
+cd /home/pi/Downloads
+sudo mv arduino-1.8.13 /opt/arduino-1.8.13
+cd /opt/arduino-1.8.13
+sudo ./install.sh
+rm /home/pi/Desktop/arduino-arduinoide.desktop
+
+sudo ./install.sh
+sudo ./uninstall.sh
+sudo ./install.sh
+
+
+=> same.
+
+ha...  what's the problem...?
+
+ok.. first..
+
+OpenCR setup
+URL : https://emanual.robotis.com/docs/en/platform/turtlebot3/opencr_setup/
+
+$ sudo dpkg --add-architecture armhf
+$ sudo apt-get update
+$ sudo apt-get install libc6:armhf
+$ export OPENCR_PORT=/dev/ttyACM0
+$ export OPENCR_MODEL=burger
+$ rm -rf ./opencr_update.tar.bz2
+$ wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/raw/master/turtlebot3/ROS1/latest/opencr_update.tar.bz2 
+$ tar -xvf opencr_update.tar.bz2 
+$ cd ./opencr_update
+$ ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
+
+? ok it's work!!
+
+roscore
+roslaunch turtlebot3_bringup turtlebot3_robot.launch
+...again
+from serial import Serial, SerialException, SerialTimeoutException
+ImportError: cannot import name 'Serial' from 'serial'
+
+pyenv activate rospy3
+roslaunch turtlebot3_bringup turtlebot3_robot.launch
+
+
+[ERROR] [1607061157.549730]: Cannot import package : tf
+[ERROR] [1607061157.556736]: sys.path was ['/home/pi/catkin_ws/src/rosserial/rosserial_python/src', '/home/pi/catkin_ws/src/rosserial/rosserial_python/nodes', '/home/pi/catkin_ws/devel/lib/python2.7/dist-packages', '/opt/ros/melodic/lib/python2.7/dist-packages', '/home/pi/.pyenv/versions/3.7.9/lib/python37.zip', '/home/pi/.pyenv/versions/3.7.9/lib/python3.7', '/home/pi/.pyenv/versions/3.7.9/lib/python3.7/lib-dynload', '/home/pi/.pyenv/versions/rospy3/lib/python3.7/site-packages']
+[ERROR] [1607061157.565315]: Creation of publisher failed: 'NoneType' object has no attribute 'msg'
+[ERROR] [1607061157.608085]: Tried to publish before configured, topic id 133
+
+...
+ok...
+
+roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+
+not working...
+omg.. 
+
+
+pyenv deactivate rospy3
+
+1. roslaunch turtlebot3_bringup turtlebot3_model.launch
+
+
+2. roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch --screen
+-> keybord not working...
+if push w in keybord, then
+
+
+3.roslaunch turtlebot3_bringup turtlebot3_robot.launch.
+
+Error : ImportError: cannot import name 'Serial' from 'serial' (/home/pi/.pyenv/versions/3.7.9/lib/python3.7/site-packages/serial/__init__.py)
+
+=> pip3 install serial, Serial 
+=>> still Error
+
+so
+=>>> install serial in pyenv (rospy3)
+try : pyenv activate rospy3
+try : roslaunch turtlebot3_bringup turtlebot3_robot.launch
+then :
+[ERROR] [1607063691.711857]: Cannot import package : tf
+
+[ERROR] [1607063691.721708]: sys.path was ['/home/pi/catkin_ws/src/rosserial/rosserial_python/src', '/home/pi/catkin_ws/src/rosserial/rosserial_python/nodes', '/home/pi/catkin_ws/devel/lib/python2.7/dist-packages', '/opt/ros/melodic/lib/python2.7/dist-packages', '/home/pi/.pyenv/versions/3.7.9/lib/python37.zip', '/home/pi/.pyenv/versions/3.7.9/lib/python3.7', '/home/pi/.pyenv/versions/3.7.9/lib/python3.7/lib-dynload', '/home/pi/.pyenv/versions/rospy3/lib/python3.7/site-packages']
+
+[ERROR] [1607063691.727144]: Creation of publisher failed: 'NoneType' object has no attribute 'msg'
+
+[ERROR] [1607063691.781164]: Tried to publish before configured, topic id 133
+
+=> Sitll have Error
+
+rostopic list
+rqt_graph
+rostopic type /scan
+rostopic type /imu
+rostopic type /cmd_vel
+rostopic type /diagnostics
+rostopic info /scan
+rostopic info /imu
+rostopic info /cmd_vel
+rostopic info /diagnostics
+
+sensor_msgs/LaserScan
+sensor_msgs/Imu
+
+rostopic info /scan
+Type: sensor_msgs/LaserScan
+Publishers: 
+ * /turtlebot3_lds (http://localhost:46029/)
+Subscribers: 
+ * /turtlebot3_diagnostics (http://localhost:33899/)
+
+rostopic info /imu
+Type: sensor_msgs/Imu
+Publishers: 
+ * /turtlebot3_core (http://localhost:37629/)
+Subscribers: 
+ * /turtlebot3_diagnostics (http://localhost:33899/)
+
+
+
+problem 1.
+but have tf, of tensorflow...
+pip list -> tf 1.12.1  // tensorflow 1.14.0
+
+problem 2.
+msg error...
+sensor_msgs/LaserScan
+sensor_msgs/Imu
+[ERROR] [1607063691.727144]: Creation of publisher failed: 'NoneType' object has no attribute 'msg'
+[ERROR] [1607063691.781164]: Tried to publish before configured, topic id 133
+
+
+
+>>>
+
+roslaunch turtlebot3_bringup turtlebot3_robot.launch
+
+했는데 오류가 난다면
+
+홈에서
+
+mkdir rosserial
+
+cd rosserial
+
+$rosinstall_generator rosserial --rosdistro melodic --deps --wet-only --tar > melodic-rosserial-wet.rosinstall
+$ wstool init src melodic-rosserial-wet.rosinstall
+
+$ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic
+
+
+///
+delete Arduino
+=> sudo ./uninstall.sh
+
+
+
+
+but still error
+=> Failed to process package 'tf' :
+
+so following this URL :
+https://github.com/ros/geometry2/issues/293
+
+cd catkin_ws
+cd src 
+git clone https://github.com/ros/geometry
+git clone https://github.com/ros/geometry2
+cd ..
+virtualenv -p /usr/bin/python3 venv
+source venv/bin/activate
+pip install catkin_pkg pyyaml empy rospkg numpy
+cm ( catkin build )
+source devel/setup.bash
+
+
+
+->
+but still have error of
+from serial import Serial, SerialException, SerialTimeoutException
+ImportError: cannot import name 'Serial' from 'serial' (/home/pi/.pyenv/versions/3.7.9/lib/python3.7/site-packages/serial/__init__.py)
+[turtlebot3_core-1] process has died [pid 29542, exit code 1, cmd /home/pi/catkin_ws/src/rosserial/rosserial_python/nodes/serial_node.py __name:=turtlebot3_core __log:=/home/pi/.ros/log/4f39b7b6-3618-11eb-b934-dca63240c01f/turtlebot3_core-1.log].
+log file: /home/pi/.ros/log/4f39b7b6-3618-11eb-b934-dca63240c01f/turtlebot3_core-1*.log
+
+.....?
+
+=> so try again : 
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic
+
+
+still error
+<== Failed to process package 'tf': 
+
